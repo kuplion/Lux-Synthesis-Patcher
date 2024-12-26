@@ -421,8 +421,8 @@ namespace ELE_Patcher.Utility
 			#region Legacy of the Dragonborn
 			if (mods.Contains(KeyLotDb))
 			{
-				// Check version
-				bool old = !LegacyoftheDragonborn.Cell.DBMDGArmoryWest.TryResolve(state.LinkCache, out _);
+                // Check version
+                bool old = !LegacyoftheDragonborn.Cell.DBMDGArmoryWest.TryResolve(state.LinkCache, out var rec);
 
 				dictionary.Add(LegacyoftheDragonborn.Cell.SancreTorCatacombs, dark);
 				dictionary.Add(LegacyoftheDragonborn.Cell.SancreTorHallOfJudgement, dark);

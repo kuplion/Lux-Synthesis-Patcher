@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Mutagen.Bethesda.Skyrim;
 using System.Threading.Tasks;
-
 using Noggog;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
@@ -30,7 +28,7 @@ namespace ELE_Patcher
                 .SetTypicalOpen(GameRelease.SkyrimSE, "Synthesis Lux patch.esp")
 				.AddRunnabilityCheck(state =>
 				{
-					state.LoadOrder.AssertHasMod(KeyELE, true, "\n\nLux plugin missing, not active, or inaccessible to patcher!\n\n");
+					state.LoadOrder.AssertListsMod(KeyELE, true, "\n\nLux plugin missing, not active, or inaccessible to patcher!\n\n");
 				})
 				.Run(args);
         }
@@ -180,7 +178,7 @@ namespace ELE_Patcher
 		{
 			HashSet<ModKey> presentSupportedMods = new();
 			foreach (var mod in ModSupport.SupportedMods)
-				if (state.LoadOrder.HasMod(mod, true))
+				if (state.LoadOrder.ModExists(mod, true))
 					presentSupportedMods.Add(mod);
 
 			if (presentSupportedMods.Count == 0)
