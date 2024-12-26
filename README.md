@@ -2,7 +2,7 @@
 
 ## Description
 
-Carries over all changes from [Lux](https://www.nexusmods.com/skyrimspecialedition/mods/43158). Also patches some modded locations to use ELE's lighting templates & image spaces, and adjusts some modded imagespaces & lights.
+Carries over all changes from [Lux](https://www.nexusmods.com/skyrimspecialedition/mods/43158). Also patches some modded locations to use Lux's lighting templates & image spaces, and adjusts some modded imagespaces & lights.
 
 <details>
   <summary>Detailed list of included changes</summary>
