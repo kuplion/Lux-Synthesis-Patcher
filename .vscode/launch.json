@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/ELE_Patcher/bin/Debug/net5.0/ELE_Patcher.dll",
+            "program": "${workspaceFolder}/LUX_Patcher/bin/Debug/net5.0/LUX_Patcher.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/ELE_Patcher",
+            "cwd": "${workspaceFolder}/LUX_Patcher",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false

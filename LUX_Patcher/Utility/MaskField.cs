@@ -3,7 +3,7 @@ using System.Linq;
 
 using Mutagen.Bethesda.Skyrim;
 
-namespace ELE_Patcher.Utility
+namespace LUX_Patcher.Utility
 {
 	public static class EqualityMasks
 	{

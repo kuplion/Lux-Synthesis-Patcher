@@ -5,14 +5,15 @@ using Mutagen.Bethesda.Plugins;
 
 namespace Mutagen.Bethesda.FormKeys.SkyrimSE
 {
-    public static partial class ELE_SSE
+    public static partial class LUX_PATCH
     {
         public static class ImageSpace
         {
             private static FormLink<IImageSpaceGetter> Construct(uint id) => new FormLink<IImageSpaceGetter>(ModKey.MakeFormKey(id));
-            public static FormLink<IImageSpaceGetter> _1ELE_Dungeon_IS => Construct(0x7216);
-            public static FormLink<IImageSpaceGetter> _1ELE_Interior_IS => Construct(0x7217);
-            public static FormLink<IImageSpaceGetter> _1ELE_Test_IS => Construct(0x60ba7);
+            public static FormLink<IImageSpaceGetter> _LUX_Dungeon_IS => Construct(0x975CF); // Lux_ISUnderground [IMGS:080975CF]
+            public static FormLink<IImageSpaceGetter> _LUX_Interior_IS => Construct(0x924B3); // Lux_ISHouses [IMGS:080924B3]
+
+            // public static FormLink<IImageSpaceGetter> _LUX_Test_IS => Construct(0x60ba7);
         }
     }
 }

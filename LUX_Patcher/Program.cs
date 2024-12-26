@@ -8,13 +8,13 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Synthesis;
 
-using ELE_Patcher.Utility;
+using LUX_Patcher.Utility;
 
-namespace ELE_Patcher
+namespace LUX_Patcher
 {
     public class Program
     {
-		private static readonly ModKey KeyELE = ModKey.FromNameAndExtension("Lux.esp");
+		private static readonly ModKey KeyLUX = ModKey.FromNameAndExtension("Lux.esp");
 		static Lazy<Settings> Settings = null!;
 
 		public static async Task<int> Main(string[] args)
@@ -28,7 +28,7 @@ namespace ELE_Patcher
                 .SetTypicalOpen(GameRelease.SkyrimSE, "Synthesis Lux patch.esp")
 				.AddRunnabilityCheck(state =>
 				{
-					state.LoadOrder.AssertListsMod(KeyELE, true, "\n\nLux plugin missing, not active, or inaccessible to patcher!\n\n");
+					state.LoadOrder.AssertListsMod(KeyLUX, true, "\n\nLux plugin missing, not active, or inaccessible to patcher!\n\n");
 				})
 				.Run(args);
         }
@@ -36,7 +36,8 @@ namespace ELE_Patcher
         public static void RunPatch(IPatcherState<ISkyrimMod, ISkyrimModGetter> state)
         {
 			PatchVanilla(state);
-            PatchModded(state);
+			if (!Settings.Value.SkipModded)
+				PatchModded(state);
             Console.WriteLine();
         }
 
@@ -45,14 +46,14 @@ namespace ELE_Patcher
 			if (Settings.Value.SkipVanilla)
 				return;
 
-			using var mod = KeyELE.GetModAndMasters(state, out var masters);
+			using var mod = KeyLUX.GetModAndMasters(state, out var masters);
 			Console.WriteLine("\nPatching records from Lux.esp:");
 
 			#region Image spaces
 			Console.WriteLine("- Image spaces");
 			foreach (var modded in mod.ImageSpaces)
 			{
-				if (!modded.InitializeRecordVars(state, KeyELE, masters, out var vanillas, out ImageSpace? patched, out var changed))
+				if (!modded.InitializeRecordVars(state, KeyLUX, masters, out var vanillas, out ImageSpace? patched, out var changed))
 					continue;
 
 				patched.PatchHdr(vanillas, modded, ref changed);
@@ -67,7 +68,7 @@ namespace ELE_Patcher
 			Console.WriteLine("- Lights");
 			foreach (var modded in mod.Lights)
 			{
-				if (!modded.InitializeRecordVars(state, KeyELE, masters, out var vanillas, out Light? patched, out var changed))
+				if (!modded.InitializeRecordVars(state, KeyLUX, masters, out var vanillas, out Light? patched, out var changed))
 					continue;
 
 				patched.PatchRecordFlags(vanillas, modded, ref changed);
@@ -92,7 +93,7 @@ namespace ELE_Patcher
 			{
 				var modded = moddedContext.Record;
 
-				if (!modded.InitializeRecordVars(state, KeyELE, masters, out var vanillas, out Worldspace? patched, out var changed))
+				if (!modded.InitializeRecordVars(state, KeyLUX, masters, out var vanillas, out Worldspace? patched, out var changed))
 					continue;
 
 				patched.GetMasks(vanillas, modded, out var moddedEquals, out var vanillasEqual, out var doCopy);
@@ -115,7 +116,7 @@ namespace ELE_Patcher
 			{
 				var modded = moddedContext.Record;
 
-				if (!modded.InitializeRecordVars(state, KeyELE, masters, out var vanillas, out Cell? patched, out var changed))
+				if (!modded.InitializeRecordVars(state, KeyLUX, masters, out var vanillas, out Cell? patched, out var changed))
 					continue;
 
 				patched.PatchFlags(vanillas, modded, ref changed);
@@ -149,7 +150,7 @@ namespace ELE_Patcher
 			{
 				var modded = moddedContext.Record;
 
-				if (!modded.InitializeRecordVars(state, KeyELE, masters, out var vanillas, out PlacedObject? patched, out var changed))
+				if (!modded.InitializeRecordVars(state, KeyLUX, masters, out var vanillas, out PlacedObject? patched, out var changed))
 					continue;
 
 				patched.PatchRecordFlags(vanillas, modded, ref changed);
@@ -172,6 +173,8 @@ namespace ELE_Patcher
 				}
 			}
 			#endregion
+            Console.WriteLine();
+			Console.WriteLine("- Vanilla Finished");
 		}
 
 		private static void PatchModded(IPatcherState<ISkyrimMod, ISkyrimModGetter> state)
@@ -247,6 +250,8 @@ namespace ELE_Patcher
 			}
 			presentSupportedMods.PatchLightsExtra(state);
 			#endregion
+            Console.WriteLine();
+			Console.WriteLine("- Modded Finished");
 		}
 	}
 }
