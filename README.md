@@ -16,7 +16,7 @@ Carries over all changes from [Lux](https://www.nexusmods.com/skyrimspecialediti
 
 ## Installation
 
-### Synthesis (Match or 0.20.5+ required)
+### Synthesis (Match or 0.32.1+ required)
 
 If you have Synthesis, there are 3 options:
 - In Synthesis, click on Git repository, and choose Lux Patcher from the list of patchers
