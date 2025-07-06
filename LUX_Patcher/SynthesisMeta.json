@@ -1,0 +1,16 @@
+{
+  "Nickname": "Lux Patcher",
+  "Visibility": "Visible",
+  "OneLineDescription": "ELE Patcher Tailored for Lux",
+  "LongDescription": "Synthesis Patcher originally for ELE but now Tailored for Lux.",
+  "PreferredAutoVersioning": "LatestDefaultBranch",
+  "RequiredMods": [
+    "Lux.esp"
+  ],
+  "TargetedReleases": [
+    "SkyrimLE",
+    "SkyrimSE",
+    "SkyrimVR",
+    "SkyrimSEGog"
+  ]
+}

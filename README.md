@@ -1,8 +1,8 @@
-# Enhanced Lighting for ENB Synthesis patcher
+# Lux Synthesis patcher
 
 ## Description
 
-Carries over all changes from [Enhanced Lighting for ENB](https://www.nexusmods.com/skyrimspecialedition/mods/1377). Also patches some modded locations to use ELE's lighting templates & image spaces, and adjusts some modded imagespaces & lights.
+Carries over all changes from [Lux](https://www.nexusmods.com/skyrimspecialedition/mods/43158). Also patches some modded locations to use Lux's lighting templates & image spaces, and adjusts some modded imagespaces & lights.
 
 <details>
   <summary>Detailed list of included changes</summary>
@@ -36,15 +36,8 @@ Carries over all changes from [Enhanced Lighting for ENB](https://www.nexusmods.
 
 ## Installation
 
-### Synthesis (Match or 0.20.5+ required)
+### Synthesis (Match or 0.32.1+ required)
 
 If you have Synthesis, there are 3 options:
-- In Synthesis, click on Git repository, and choose ELE Patcher from the list of patchers
-- [Grab the exe](https://github.com/Benna96-Synthesis/ELE_patcher/releases/latest/download/ELE_Patcher.exe), then in Synthesis, click on External Program, and browse for the exe
+- In Synthesis, click on Git repository, and choose Lux Patcher from the list of patchers
   - Not recommended
-
-### Standalone
-
-The patcher does run without Synthesis as well. Just [grab the exe](https://github.com/Benna96-Synthesis/ELE_patcher/releases/latest/download/ELE_Patcher.exe) and run it. The generated plugin is called `Synthesis ELE patch.esp`.
-
-If you're an MO2 user, as with all things, remember to run through MO2!

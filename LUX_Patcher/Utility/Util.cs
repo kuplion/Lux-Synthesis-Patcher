@@ -11,7 +11,7 @@ using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Plugins.Records;
 
-namespace ELE_Patcher.Utility
+namespace LUX_Patcher.Utility
 {
 	public static class Util
 	{

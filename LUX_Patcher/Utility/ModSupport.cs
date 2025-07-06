@@ -9,7 +9,7 @@ using Mutagen.Bethesda.Plugins.Records;
 using Mutagen.Bethesda.Synthesis;
 using Noggog;
 
-namespace ELE_Patcher.Utility
+namespace LUX_Patcher.Utility
 {
 	public static class ModSupport
 	{
@@ -43,18 +43,18 @@ namespace ELE_Patcher.Utility
 		#endregion
 		#region ELE links
 		// Lighting templates
-		private static readonly FormLink<ILightingTemplateGetter> brightLt = ELE_SSE.LightingTemplate._1ELE_Bright_LT;
-		private static readonly FormLink<ILightingTemplateGetter> brighterLt = ELE_SSE.LightingTemplate._1ELE_Brighter_LT;
-		private static readonly FormLink<ILightingTemplateGetter> darkLt = ELE_SSE.LightingTemplate._1ELE_Dark_LT;
-		private static readonly FormLink<ILightingTemplateGetter> darkDwemerLt = ELE_SSE.LightingTemplate._1ELE_Dark_Dwemer_LT;
-		private static readonly FormLink<ILightingTemplateGetter> darkFalmerLt = ELE_SSE.LightingTemplate._1ELE_Dark_Falmer_LT;
-		private static readonly FormLink<ILightingTemplateGetter> darkIceLt = ELE_SSE.LightingTemplate._1ELE_Dark_Ice_LT;
-		private static readonly FormLink<ILightingTemplateGetter> darkThinFogLt = ELE_SSE.LightingTemplate._1ELE_Dark_ThinFog_LT;
-		private static readonly FormLink<ILightingTemplateGetter> mediumLt = ELE_SSE.LightingTemplate._1ELE_Medium_LT;
+		private static readonly FormLink<ILightingTemplateGetter> brightLt = LUX_PATCH.LightingTemplate._LUX_Bright_LT;
+		private static readonly FormLink<ILightingTemplateGetter> brighterLt = LUX_PATCH.LightingTemplate._LUX_Brighter_LT;
+		private static readonly FormLink<ILightingTemplateGetter> darkLt = LUX_PATCH.LightingTemplate._LUX_Dark_LT;
+		private static readonly FormLink<ILightingTemplateGetter> darkDwemerLt = LUX_PATCH.LightingTemplate._LUX_Dark_Dwemer_LT;
+		private static readonly FormLink<ILightingTemplateGetter> darkFalmerLt = LUX_PATCH.LightingTemplate._LUX_Dark_Falmer_LT;
+		private static readonly FormLink<ILightingTemplateGetter> darkIceLt = LUX_PATCH.LightingTemplate._LUX_Dark_Ice_LT;
+		private static readonly FormLink<ILightingTemplateGetter> darkThinFogLt = LUX_PATCH.LightingTemplate._LUX_Dark_ThinFog_LT;
+		private static readonly FormLink<ILightingTemplateGetter> mediumLt = LUX_PATCH.LightingTemplate._LUX_Medium_LT;
 
 		// Image spaces
-		private static readonly FormLink<IImageSpaceGetter> dungeonIs = ELE_SSE.ImageSpace._1ELE_Dungeon_IS;
-		private static readonly FormLink<IImageSpaceGetter> interiorIs = ELE_SSE.ImageSpace._1ELE_Interior_IS;
+		private static readonly FormLink<IImageSpaceGetter> dungeonIs = LUX_PATCH.ImageSpace._LUX_Dungeon_IS;
+		private static readonly FormLink<IImageSpaceGetter> interiorIs = LUX_PATCH.ImageSpace._LUX_Interior_IS;
 
 		// Combinations, to save writing, lighting templates mostly come with the same image space
 		private static readonly (FormLink<ILightingTemplateGetter>, FormLink<IImageSpaceGetter>) bright = (brightLt, interiorIs);
@@ -75,35 +75,35 @@ namespace ELE_Patcher.Utility
 			#region Beyond Skyrim - Bruma
 			if (mods.Contains(KeyBruma))
 			{
-				// Create 1ELE_DungeonAyleid_IS
-				var ayleidDungeonEdid = "ELE_Patcher_1ELE_DungeonAyleid_IS";
+				// Create LUX_Patcher_Lux_ISDungeonAyleid - Matched to Lux_ISUnderground [IMGS:DD0975CF]
+				var ayleidDungeonEdid = "LUX_Patcher_Lux_ISDungeonAyleid";
 				var eleDungeonIs = dungeonIs.Resolve(state.LinkCache);
 				var ayleidDungeonIs = state.PatchMod.ImageSpaces.DuplicateInAsNewRecord(eleDungeonIs, ayleidDungeonEdid);
 				ayleidDungeonIs.EditorID = ayleidDungeonEdid;
 
 				if (ayleidDungeonIs.Hdr != null)
 				{
-					ayleidDungeonIs.Hdr.BloomThreshold = 0.5f;
-					ayleidDungeonIs.Hdr.BloomScale = 1.6f;
-					ayleidDungeonIs.Hdr.ReceiveBloomThreshold = 1f;
+					ayleidDungeonIs.Hdr.BloomThreshold = 0.4f;
+					ayleidDungeonIs.Hdr.BloomScale = 0.6f;
+					ayleidDungeonIs.Hdr.ReceiveBloomThreshold = 100f;
 				}
 
 				if (ayleidDungeonIs.Cinematic != null)
 				{
-					ayleidDungeonIs.Cinematic.Saturation = 0.8f;
-					ayleidDungeonIs.Cinematic.Brightness = 1.0001f;
+					ayleidDungeonIs.Cinematic.Saturation = 1.0f;
+					ayleidDungeonIs.Cinematic.Brightness = 1.0f;
 				}
 
 				if (ayleidDungeonIs.Tint != null)
-					ayleidDungeonIs.Tint.Color = System.Drawing.Color.FromArgb(128, 198, 255);
+					ayleidDungeonIs.Tint.Color = System.Drawing.Color.FromArgb(0, 0, 0);
 
 				if (ayleidDungeonIs.DepthOfField != null)
 				{
-					ayleidDungeonIs.DepthOfField.Strength = 0.6f;
-					ayleidDungeonIs.DepthOfField.Distance = 500f;
-					ayleidDungeonIs.DepthOfField.Range = 1500f;
-					ayleidDungeonIs.DepthOfField.Sky = false;
-					ayleidDungeonIs.DepthOfField.BlurRadius = 0;
+					ayleidDungeonIs.DepthOfField.Strength = 1.0f;
+					ayleidDungeonIs.DepthOfField.Distance = 7000f;
+					ayleidDungeonIs.DepthOfField.Range = 4000f;
+					ayleidDungeonIs.DepthOfField.Sky = true;
+					ayleidDungeonIs.DepthOfField.BlurRadius = 4;
 				}
 
 				dictionary.Add(ayleidDungeonEdid, new(ayleidDungeonIs.FormKey));
@@ -124,7 +124,7 @@ namespace ELE_Patcher.Utility
 			#region Beyond Skyrim - Bruma
 			if (mods.Contains(KeyBruma))
 			{
-				var ayleidDungeonIs = customImageSpaces.GetValueOrDefault("ELE_Patcher_1ELE_DungeonAyleid_IS");
+				var ayleidDungeonIs = customImageSpaces.GetValueOrDefault("LUX_Patcher_Lux_ISDungeonAyleid");
 
 				dictionary.Add(BSHeartland.Cell.CYRAnga, (darkDwemerLt, ayleidDungeonIs));
 				dictionary.Add(BSHeartland.Cell.CYRApplewatchAebondsHouse, bright);
@@ -421,8 +421,8 @@ namespace ELE_Patcher.Utility
 			#region Legacy of the Dragonborn
 			if (mods.Contains(KeyLotDb))
 			{
-				// Check version
-				bool old = !LegacyoftheDragonborn.Cell.DBMDGArmoryWest.TryResolve(state.LinkCache, out _);
+                // Check version
+                bool old = !LegacyoftheDragonborn.Cell.DBMDGArmoryWest.TryResolve(state.LinkCache, out var rec);
 
 				dictionary.Add(LegacyoftheDragonborn.Cell.SancreTorCatacombs, dark);
 				dictionary.Add(LegacyoftheDragonborn.Cell.SancreTorHallOfJudgement, dark);
